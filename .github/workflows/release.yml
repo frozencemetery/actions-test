@@ -45,7 +45,7 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "tag_build/${{ steps.ugh.outputs.basepath }}.sha512sum",
+                        "asset_path": "tag_build/${{ steps.ugh.outputs.basename }}.sha512sum",
                         "asset_name": "${{ steps.ugh.outputs.basename }}.sha512sum",
                         "asset_content_type": "text/plain",
                     },
