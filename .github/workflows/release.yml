@@ -11,7 +11,7 @@
                 },
                 {
                     "name": "Make a fake release",
-                    "run": "mkdir tag_build && echo foo > tag_build/hotdiggitydang.tar.gz && sha512sum tag_build/*",
+                    "run": "mkdir tag_build && echo foo > tag_build/hotdiggitydang.tar.gz && sha512sum tag_build/* > tag_build/hotdiggitydang.tar.gz.sha512sum",
                 },
                 {
                     "name": "Create release",
