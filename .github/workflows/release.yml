@@ -1,0 +1,54 @@
+{
+    "name": "Release",
+    "on": { "push": { "tags": "v*" }},
+    "jobs": {
+        "release-linux": {
+            "runs-on": "ubuntu-latest",
+            "steps": [
+                {
+                    "name": "Check out code",
+                    "uses": "actions/checkout@v2",
+                },
+                {
+                    "name": "Make a fake release",
+                    "run": [
+                        "touch tag_build/hotdiggitydang.tar.gz",
+                        "sha512sum tag_build/*",
+                    ],
+                },
+                {
+                    "name": "Create release",
+                    "uses": "actions/create-release@v1",
+                    "id": "cr",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "tag_name": "${{ github.ref }}",
+                        "release_name": "${{ github.ref }}",
+                    },
+                },
+                {
+                    "name": "Ugh",
+                    "run": "echo \"::set-output name=basepath::`ls tag_build/*.tar.gz`\""
+                },
+                {
+                    "name": "Upload release tarball",
+                    "uses": "actions/upload-release-asset@v1",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "upload_url": "${{ steps.cr.outputs.upload_url }}",
+                        "asset_path": "${{ steps.ugh.basepath }}",
+                    },
+                },
+                {
+                    "name": "Upload release checksum",
+                    "uses": "actions/upload-release-asset@v1",
+                    "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
+                    "with": {
+                        "upload_url": "${{ steps.cr.outputs.upload_url }}",
+                        "asset_path": "${{ steps.ugh.basepath }}.sha512sum",
+                    },
+                },
+            ],
+        },
+    },
+}
