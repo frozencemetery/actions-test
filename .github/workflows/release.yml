@@ -25,6 +25,7 @@
                 },
                 {
                     "name": "Ugh",
+                    "id": "ugh",
                     "run": "echo \"::set-output name=basepath::`ls tag_build/*.tar.gz`\""
                 },
                 {
