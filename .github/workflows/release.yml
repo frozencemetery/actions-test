@@ -33,7 +33,7 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "${{ steps.ugh.basepath }}",
+                        "asset_path": "${{ steps.ugh.outputs.basepath }}",
                     },
                 },
                 {
@@ -42,7 +42,7 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "${{ steps.ugh.basepath }}.sha512sum",
+                        "asset_path": "${{ steps.ugh.outputs.basepath }}.sha512sum",
                     },
                 },
             ],
