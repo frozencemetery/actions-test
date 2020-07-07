@@ -26,7 +26,7 @@
                 {
                     "name": "Ugh",
                     "id": "ugh",
-                    "run": "echo \"::set-output name=basepath::`ls tag_build/*.tar.gz`\""
+                    "run": "echo \"::set-output name=basename::`ls tag_build/*.tar.gz | awk -F/ '{print $2}'`\""
                 },
                 {
                     "name": "Upload release tarball",
@@ -34,7 +34,8 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "${{ steps.ugh.outputs.basepath }}",
+                        "asset_path": "tag_build/${{ steps.ugh.outputs.basename }}",
+                        "asset_name": "${{ steps.ugh.outputs.basename }}",
                     },
                 },
                 {
@@ -43,7 +44,8 @@
                     "env": { "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}" },
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
-                        "asset_path": "${{ steps.ugh.outputs.basepath }}.sha512sum",
+                        "asset_path": "tag_build/${{ steps.ugh.outputs.basepath }}.sha512sum",
+                        "asset_name": "${{ steps.ugh.outputs.basename }}.sha512sum",
                     },
                 },
             ],
