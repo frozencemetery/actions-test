@@ -49,7 +49,7 @@
                     "with": {
                         "upload_url": "${{ steps.cr.outputs.upload_url }}",
                         "asset_path": "tag_build/${{ steps.checksum.outputs.checksum }}",
-                        "asset_name": "${{ steps.ugh.outputs.checksum }}",
+                        "asset_name": "${{ steps.checksum.outputs.checksum }}",
                         "asset_content_type": "text/plain",
                     },
                 },
