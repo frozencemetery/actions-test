@@ -8,10 +8,9 @@
         "el7-ipa": {
             "container": "centos:7",
             "steps": [
-                { "uses": "actions/checkout@v2" },
                 { "run": "echo cat > dog\ncat dog" },
-                { "run": "ls" \
-                          "cat dog" },
+                { "run": "ls" +
+                  "cat dog" },
             ],
         },,
     },
