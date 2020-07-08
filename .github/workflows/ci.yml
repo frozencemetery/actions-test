@@ -10,7 +10,7 @@
             "steps": [
                 { "uses": "actions/checkout@v2" },
                 { "run": "echo cat > dog\ncat dog" },
-                { "run": "ls"
+                { "run": "ls" \
                           "cat dog" },
             ],
         },,
